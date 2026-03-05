@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>i13.space — Explore the Universe Live</title>
+  <meta name="description" content="Live ISS tracker, NASA Photo of the Day, astronauts in space, and real-time space news. Explore the universe live at i13.space.">
+  <meta name="keywords" content="ISS tracker, NASA APOD, space news, astronauts, ISS live, space exploration, telescope, SpaceX, NASA">
+  <meta property="og:title" content="i13.space — Explore the Universe Live">
+  <meta property="og:description" content="Live ISS tracker, NASA Photo of the Day, astronauts in space, and real-time space news.">
+  <meta property="og:url" content="https://i13.space/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="i13.space — Explore the Universe Live">
+  <meta name="twitter:description" content="Live ISS tracker, NASA Photo of the Day, astronauts in space, and real-time space news.">
+  <link rel="canonical" href="https://i13.space/">
+  <style>
+    :root {
+      --bg: #050510;
+      --card: #0d1220;
+      --card2: #0a0f1a;
+      --accent: #00f5d4;
+      --accent2: #58a6ff;
+      --purple: #bf5af2;
+      --text: #f0f0f0;
+      --muted: #a0a0b8;
+      --border: #1a2a3e;
+      --radius: 12px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ========== STARFIELD ========== */
+    .starfield {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .starfield::before,
+    .starfield::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+    }
+    .starfield::before {
+      background-image:
+        radial-gradient(1px 1px at 5% 8%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 12% 22%, rgba(255,255,255,0.7) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 20% 5%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 28% 38%, rgba(255,255,255,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 35% 15%, #fff 0%, transparent 100%),
+        radial-gradient(2px 2px at 42% 52%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 50% 28%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 58% 72%, rgba(255,255,255,0.8) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 65% 10%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 72% 45%, rgba(255,255,255,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 80% 30%, #fff 0%, transparent 100%),
+        radial-gradient(2px 2px at 88% 60%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 95% 18%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 3% 55%, rgba(255,255,255,0.7) 0%, transparent 100%),
+        radial-gradient(1px 1px at 15% 70%, #fff 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 25% 82%, rgba(255,255,255,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 38% 65%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 48% 90%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 55% 48%, #fff 0%, transparent 100%),
+        radial-gradient(2px 2px at 62% 85%, rgba(255,255,255,0.7) 0%, transparent 100%),
+        radial-gradient(1px 1px at 70% 75%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 78% 92%, rgba(255,255,255,0.6) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 85% 42%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 92% 80%, rgba(255,255,255,0.8) 0%, transparent 100%),
+        radial-gradient(1px 1px at 8% 95%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 18% 40%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 32% 58%, #fff 0%, transparent 100%),
+        radial-gradient(2px 2px at 45% 12%, rgba(255,255,255,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 53% 78%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 68% 25%, rgba(255,255,255,0.7) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 75% 55%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 82% 15%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 35%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 97% 62%, rgba(255,255,255,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 22% 95%, #fff 0%, transparent 100%),
+        radial-gradient(2px 2px at 40% 88%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 60% 95%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 77% 8%, rgba(255,255,255,0.7) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 93% 50%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 10% 35%, rgba(255,255,255,0.6) 0%, transparent 100%);
+      animation: twinkle1 6s ease-in-out infinite alternate;
+    }
+    .starfield::after {
+      background-image:
+        radial-gradient(1px 1px at 7% 18%, rgba(0,245,212,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 17% 62%, rgba(88,166,255,0.3) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 27% 42%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 37% 78%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 47% 22%, rgba(191,90,242,0.3) 0%, transparent 100%),
+        radial-gradient(2px 2px at 57% 58%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 67% 35%, rgba(255,255,255,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 77% 82%, rgba(0,245,212,0.3) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 87% 12%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 97% 45%, rgba(88,166,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 13% 88%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 33% 15%, rgba(255,255,255,0.7) 0%, transparent 100%),
+        radial-gradient(2px 2px at 53% 68%, rgba(191,90,242,0.2) 0%, transparent 100%),
+        radial-gradient(1px 1px at 73% 50%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 83% 72%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 43% 35%, rgba(0,245,212,0.2) 0%, transparent 100%),
+        radial-gradient(1px 1px at 63% 18%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 23% 52%, rgba(88,166,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 93% 28%, #fff 0%, transparent 100%),
+        radial-gradient(2px 2px at 3% 75%, rgba(255,255,255,0.6) 0%, transparent 100%);
+      animation: twinkle2 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes twinkle1 {
+      0% { opacity: 0.6; }
+      50% { opacity: 1; }
+      100% { opacity: 0.7; }
+    }
+    @keyframes twinkle2 {
+      0% { opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { opacity: 0.9; }
+    }
+
+    /* ========== NAV ========== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(5, 5, 16, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+      gap: 16px;
+    }
+    .nav-logo {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+      white-space: nowrap;
+    }
+    .nav-tagline {
+      color: var(--muted);
+      font-size: 0.8rem;
+      flex: 1;
+      padding-left: 12px;
+      display: none;
+    }
+    @media (min-width: 600px) { .nav-tagline { display: block; } }
+    .nav-actions { display: flex; gap: 8px; align-items: center; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-decoration: none;
+      border: none;
+    }
+    .btn-accent {
+      background: var(--accent);
+      color: #050510;
+    }
+    .btn-accent:hover { background: #00dfc0; transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+    .btn-outline:hover { background: rgba(0,245,212,0.08); }
+    .btn-muted {
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-muted:hover { background: #151f30; }
+
+    /* ========== LAYOUT ========== */
+    .page-wrap {
+      position: relative;
+      z-index: 1;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    section { padding: 56px 0; }
+
+    /* ========== HERO ========== */
+    .hero {
+      padding: 80px 0 64px;
+      text-align: center;
+      position: relative;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,245,212,0.1);
+      border: 1px solid rgba(0,245,212,0.25);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 0.8rem;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: livePulse 1.8s ease-in-out infinite;
+      display: inline-block;
+    }
+    @keyframes livePulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
+      50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(34,197,94,0); }
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 0%, var(--accent) 50%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--muted);
+      max-width: 540px;
+      margin: 0 auto 32px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .scroll-indicator {
+      margin-top: 56px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      animation: bobDown 2.5s ease-in-out infinite;
+    }
+    @keyframes bobDown {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
+    /* ========== SECTION HEADERS ========== */
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .section-sub {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 32px;
+    }
+
+    /* ========== CARDS ========== */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      transition: border-color 0.2s ease;
+    }
+    .card:hover { border-color: rgba(0,245,212,0.3); }
+    .card-accent {
+      border-color: rgba(0,245,212,0.25);
+      background: linear-gradient(135deg, var(--card) 0%, #0a1628 100%);
+    }
+
+    /* ========== ISS TRACKER ========== */
+    .iss-card {
+      background: linear-gradient(135deg, #0d1220 0%, #071020 100%);
+      border: 1px solid rgba(0,245,212,0.3);
+      border-radius: var(--radius);
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .iss-card::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(0,245,212,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .iss-live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(34,197,94,0.12);
+      border: 1px solid rgba(34,197,94,0.3);
+      border-radius: 100px;
+      padding: 5px 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #22c55e;
+      letter-spacing: 0.5px;
+      margin-bottom: 20px;
+    }
+    .iss-coords {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .coord-box {
+      background: rgba(5,5,16,0.6);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+    }
+    .coord-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .coord-value {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -1px;
+    }
+    .iss-updated {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .iss-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .iss-orbit-info {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .iss-orbit-info strong { color: var(--text); }
+
+    /* ========== APOD ========== */
+    .apod-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    /* ========== ASTRONAUTS ========== */
+    .astros-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    /* ========== SPACE NEWS ========== */
+    .news-grid { display: flex; flex-direction: column; gap: 10px; }
+
+    /* ========== TWO-COLUMN ========== */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
+
+    /* ========== SHOP / AFFILIATE ========== */
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .shop-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-align: center;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .shop-card:hover {
+      border-color: rgba(0,245,212,0.4);
+      transform: translateY(-3px);
+      background: #0f1825;
+    }
+    .shop-icon {
+      font-size: 2.8rem;
+      line-height: 1;
+    }
+    .shop-title {
+      font-weight: 700;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+    .shop-desc {
+      color: var(--muted);
+      font-size: 0.8rem;
+      line-height: 1.4;
+    }
+    .shop-cta {
+      margin-top: auto;
+      display: inline-block;
+      padding: 8px 18px;
+      background: var(--accent);
+      color: #050510;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.82rem;
+    }
+
+    /* ========== AFFILIATE BANNER ========== */
+    .affiliate-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
+      margin-top: 32px;
+    }
+    .aff-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .aff-card:hover {
+      border-color: rgba(88,166,255,0.4);
+      background: #0f1825;
+      transform: translateY(-2px);
+    }
+    .aff-icon { font-size: 1.8rem; flex-shrink: 0; }
+    .aff-text { min-width: 0; }
+    .aff-name { font-weight: 700; color: var(--text); font-size: 0.9rem; }
+    .aff-sub { color: var(--muted); font-size: 0.75rem; margin-top: 1px; }
+
+    /* ========== EMPIRE GRID ========== */
+    .empire-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 8px;
+    }
+    .empire-link {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 500;
+      transition: all 0.15s ease;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .empire-link:hover {
+      color: var(--accent);
+      border-color: rgba(0,245,212,0.3);
+      background: #0d1220;
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      background: var(--card2);
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+      text-align: center;
+    }
+    .footer-logo {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .footer-sub {
+      color: var(--muted);
+      font-size: 0.83rem;
+      margin-bottom: 20px;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy {
+      color: #555575;
+      font-size: 0.75rem;
+    }
+
+    /* ========== VTR PULSE ========== */
+    @keyframes vtrPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* ========== DIVIDER ========== */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
+
+    /* ========== LOADING SHIMMER ========== */
+    .shimmer {
+      background: linear-gradient(90deg, var(--card) 25%, #131d2e 50%, var(--card) 75%);
+      background-size: 200% 100%;
+      animation: shimmerAnim 1.5s infinite;
+      border-radius: 6px;
+    }
+    @keyframes shimmerAnim {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    /* ========== MOBILE ========== */
+    @media (max-width: 600px) {
+      section { padding: 40px 0; }
+      .iss-coords { grid-template-columns: 1fr; }
+      .coord-value { font-size: 1.6rem; }
+      .empire-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+    }
+
+    /* ========== SCROLLBAR ========== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(0,245,212,0.3); }
+  </style>
+</head>
+<body>
+
+<!-- Starfield background -->
+<div class="starfield" aria-hidden="true"></div>
+
+<!-- ========== NAV ========== -->
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">✦ i13.space</a>
+    <span class="nav-tagline">Live ISS tracker · NASA APOD · Space news</span>
+    <div class="nav-actions">
+      <button class="btn btn-muted" onclick="openTip()" style="font-size:0.82rem;padding:7px 14px;">🧡 Tip</button>
+      <a href="https://spunk.bet" target="_blank" rel="noopener" class="btn btn-accent" style="font-size:0.82rem;padding:7px 14px;">🎰 Play Free</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-wrap">
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">
+      <span class="live-dot"></span>
+      ISS is in orbit right now
+    </div>
+    <h1>The Universe, Live</h1>
+    <p>Track the International Space Station in real time, see NASA's Photo of the Day, and follow the latest space news — all updated live, every 10 seconds.</p>
+    <div class="hero-actions">
+      <a href="#iss-tracker" class="btn btn-accent">Track the ISS</a>
+      <a href="#apod" class="btn btn-outline">Today's Space Photo</a>
+    </div>
+    <div class="scroll-indicator">
+      <span style="font-size:1.1rem;">↓</span>
+      <span>Live data below</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ========== ISS TRACKER ========== -->
+<section id="iss-tracker">
+  <div class="container">
+    <div class="section-label">Real-time tracking</div>
+    <h2 class="section-title">ISS Live Position</h2>
+    <p class="section-sub">The International Space Station orbits Earth at ~28,000 km/h, completing an orbit every 90 minutes.</p>
+
+    <div class="iss-card">
+      <div class="iss-live-badge">
+        <span class="live-dot"></span>
+        LIVE TRACKING
+      </div>
+      <div style="color:var(--muted);font-size:0.9rem;margin-bottom:4px;">ISS is currently over:</div>
+      <div class="iss-coords">
+        <div class="coord-box">
+          <div class="coord-label">Latitude</div>
+          <div class="coord-value" id="iss-lat"><span class="shimmer" style="display:inline-block;width:120px;height:2rem;">&nbsp;</span></div>
+        </div>
+        <div class="coord-box">
+          <div class="coord-label">Longitude</div>
+          <div class="coord-value" id="iss-lon"><span class="shimmer" style="display:inline-block;width:120px;height:2rem;">&nbsp;</span></div>
+        </div>
+      </div>
+      <div class="iss-footer">
+        <div>
+          <div class="iss-updated" id="iss-updated">Fetching position...</div>
+          <div class="iss-orbit-info" style="margin-top:4px;">
+            Altitude: <strong>~408 km</strong> · Speed: <strong>~27,600 km/h</strong> · Orbit: <strong>~90 min</strong>
+          </div>
+        </div>
+        <a id="iss-share" href="#" target="_blank" rel="noopener" class="btn btn-muted" style="font-size:0.8rem;padding:8px 14px;gap:6px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          Share this moment
+        </a>
+      </div>
+    </div>
+
+    <div style="margin-top:16px;padding:14px 20px;background:rgba(0,245,212,0.05);border:1px solid rgba(0,245,212,0.15);border-radius:10px;font-size:0.82rem;color:var(--muted);">
+      <strong style="color:var(--accent);">Did you know?</strong> The ISS has been continuously inhabited since November 2000 and has hosted over 270 visitors from 20 countries. It covers roughly 92,000 km² in solar panels alone.
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ========== APOD + ASTRONAUTS (two-col) ========== -->
+<section id="apod">
+  <div class="container">
+    <div class="two-col">
+
+      <!-- APOD -->
+      <div>
+        <div class="section-label">NASA</div>
+        <h2 class="section-title">Photo of the Day</h2>
+        <p class="section-sub">Today's image from NASA's Astronomy Picture of the Day.</p>
+        <div class="apod-card" id="apod-section">
+          <div style="padding:24px;">
+            <div class="shimmer" style="height:200px;border-radius:8px;margin-bottom:16px;">&nbsp;</div>
+            <div class="shimmer" style="height:18px;width:70%;margin-bottom:10px;">&nbsp;</div>
+            <div class="shimmer" style="height:14px;width:100%;margin-bottom:6px;">&nbsp;</div>
+            <div class="shimmer" style="height:14px;width:90%;">&nbsp;</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Astronauts -->
+      <div>
+        <div class="section-label">In space right now</div>
+        <h2 class="section-title">People in Space</h2>
+        <p class="section-sub">Current crew aboard the ISS and other spacecraft.</p>
+        <div class="card" id="astros-list">
+          <div class="shimmer" style="height:48px;margin-bottom:10px;border-radius:8px;">&nbsp;</div>
+          <div class="shimmer" style="height:48px;margin-bottom:10px;border-radius:8px;">&nbsp;</div>
+          <div class="shimmer" style="height:48px;border-radius:8px;">&nbsp;</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ========== SPACE NEWS ========== -->
+<section id="space-news-section">
+  <div class="container">
+    <div class="section-label">Hacker News · Live</div>
+    <h2 class="section-title">Space News</h2>
+    <p class="section-sub">Top space, NASA, and rocketry stories right now — filtered from Hacker News.</p>
+    <div class="news-grid" id="space-news">
+      <div class="shimmer" style="height:76px;border-radius:10px;">&nbsp;</div>
+      <div class="shimmer" style="height:76px;border-radius:10px;">&nbsp;</div>
+      <div class="shimmer" style="height:76px;border-radius:10px;">&nbsp;</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ========== SHOP ========== -->
+<section id="shop">
+  <div class="container">
+    <div class="section-label">Gear up</div>
+    <h2 class="section-title">Shop Space Gear</h2>
+    <p class="section-sub">Top picks for backyard astronomers and space enthusiasts.</p>
+
+    <div class="shop-grid">
+      <a href="https://www.amazon.com/s?k=telescope&tag=spunk01-20" target="_blank" rel="noopener" class="shop-card">
+        <div class="shop-icon">🔭</div>
+        <div class="shop-title">Telescopes</div>
+        <div class="shop-desc">Explore planets, the Moon, and deep-sky objects from your backyard.</div>
+        <div class="shop-cta">Shop Telescopes →</div>
+      </a>
+      <a href="https://www.amazon.com/s?k=astronomy+binoculars&tag=spunk01-20" target="_blank" rel="noopener" class="shop-card">
+        <div class="shop-icon">🌙</div>
+        <div class="shop-title">Astronomy Binoculars</div>
+        <div class="shop-desc">Wide-field views of star clusters, the Milky Way, and the Moon.</div>
+        <div class="shop-cta">Shop Binoculars →</div>
+      </a>
+      <a href="https://www.amazon.com/s?k=star+map+poster&tag=spunk01-20" target="_blank" rel="noopener" class="shop-card">
+        <div class="shop-icon">🗺️</div>
+        <div class="shop-title">Star Maps & Posters</div>
+        <div class="shop-desc">Personalized night sky prints and constellation charts.</div>
+        <div class="shop-cta">Shop Maps →</div>
+      </a>
+      <a href="https://www.amazon.com/s?k=space+books&tag=spunk01-20" target="_blank" rel="noopener" class="shop-card">
+        <div class="shop-icon">📚</div>
+        <div class="shop-title">Space Books</div>
+        <div class="shop-desc">From beginner guides to advanced astrophysics and NASA histories.</div>
+        <div class="shop-cta">Shop Books →</div>
+      </a>
+    </div>
+
+    <!-- Affiliate strip -->
+    <div style="margin-top:40px;">
+      <div class="section-label" style="margin-bottom:16px;">Recommended platforms</div>
+      <div class="affiliate-strip">
+        <a href="https://coinbase.com/join/YAGES3X?src=referral-link" target="_blank" rel="noopener" class="aff-card">
+          <div class="aff-icon">🪙</div>
+          <div class="aff-text">
+            <div class="aff-name">Coinbase</div>
+            <div class="aff-sub">Buy Bitcoin & crypto</div>
+          </div>
+        </a>
+        <a href="https://kalshi.com/sign-up/?referral=6b72a842-a7f3-46b2-b8f4-2e3e8b498712" target="_blank" rel="noopener" class="aff-card">
+          <div class="aff-icon">📈</div>
+          <div class="aff-text">
+            <div class="aff-name">Kalshi</div>
+            <div class="aff-sub">Predict space events</div>
+          </div>
+        </a>
+        <a href="https://shop.ledger.com/?r=0553c9ea1441" target="_blank" rel="noopener" class="aff-card">
+          <div class="aff-icon">🔒</div>
+          <div class="aff-text">
+            <div class="aff-name">Ledger</div>
+            <div class="aff-sub">Secure your crypto</div>
+          </div>
+        </a>
+        <a href="https://www.amazon.com/s?k=telescope&tag=spunk01-20" target="_blank" rel="noopener" class="aff-card">
+          <div class="aff-icon">🔭</div>
+          <div class="aff-text">
+            <div class="aff-name">Amazon</div>
+            <div class="aff-sub">Best telescope deals</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ========== EMPIRE GRID ========== -->
+<section id="empire">
+  <div class="container">
+    <div class="section-label">The network</div>
+    <h2 class="section-title">Explore the Empire</h2>
+    <p class="section-sub">Sites powered by the same passion for building cool things on the internet.</p>
+    <div class="empire-grid">
+      <a href="https://spunk.bet" target="_blank" rel="noopener" class="empire-link">spunk.bet</a>
+      <a href="https://pfp.best" target="_blank" rel="noopener" class="empire-link">pfp.best</a>
+      <a href="https://spunkart.com" target="_blank" rel="noopener" class="empire-link">spunkart.com</a>
+      <a href="https://13.money" target="_blank" rel="noopener" class="empire-link">13.money</a>
+      <a href="https://13.markets" target="_blank" rel="noopener" class="empire-link">13.markets</a>
+      <a href="https://13.golf" target="_blank" rel="noopener" class="empire-link">13.golf</a>
+      <a href="https://13.energy" target="_blank" rel="noopener" class="empire-link">13.energy</a>
+      <a href="https://13.dance" target="_blank" rel="noopener" class="empire-link">13.dance</a>
+      <a href="https://free.institute" target="_blank" rel="noopener" class="empire-link">free.institute</a>
+      <a href="https://free.gripe" target="_blank" rel="noopener" class="empire-link">free.gripe</a>
+      <a href="https://chicago.coach" target="_blank" rel="noopener" class="empire-link">chicago.coach</a>
+      <a href="https://predict.horse" target="_blank" rel="noopener" class="empire-link">predict.horse</a>
+      <a href="https://predict.pics" target="_blank" rel="noopener" class="empire-link">predict.pics</a>
+      <a href="https://predict.mom" target="_blank" rel="noopener" class="empire-link">predict.mom</a>
+      <a href="https://predict.codes" target="_blank" rel="noopener" class="empire-link">predict.codes</a>
+      <a href="https://predict.boats" target="_blank" rel="noopener" class="empire-link">predict.boats</a>
+      <a href="https://predict.yachts" target="_blank" rel="noopener" class="empire-link">predict.yachts</a>
+      <a href="https://alien.best" target="_blank" rel="noopener" class="empire-link">alien.best</a>
+      <a href="https://alien.beauty" target="_blank" rel="noopener" class="empire-link">alien.beauty</a>
+      <a href="https://alien.boutique" target="_blank" rel="noopener" class="empire-link">alien.boutique</a>
+      <a href="https://plush.best" target="_blank" rel="noopener" class="empire-link">plush.best</a>
+      <a href="https://plush.surf" target="_blank" rel="noopener" class="empire-link">plush.surf</a>
+      <a href="https://plush.beer" target="_blank" rel="noopener" class="empire-link">plush.beer</a>
+      <a href="https://plush.cam" target="_blank" rel="noopener" class="empire-link">plush.cam</a>
+      <a href="https://clown.best" target="_blank" rel="noopener" class="empire-link">clown.best</a>
+      <a href="https://clown.surf" target="_blank" rel="noopener" class="empire-link">clown.surf</a>
+      <a href="https://clown.cam" target="_blank" rel="noopener" class="empire-link">clown.cam</a>
+      <a href="https://clown.sbs" target="_blank" rel="noopener" class="empire-link">clown.sbs</a>
+      <a href="https://iai.autos" target="_blank" rel="noopener" class="empire-link">iai.autos</a>
+      <a href="https://iai.boats" target="_blank" rel="noopener" class="empire-link">iai.boats</a>
+      <a href="https://i13.best" target="_blank" rel="noopener" class="empire-link">i13.best</a>
+      <a href="https://i13.buzz" target="_blank" rel="noopener" class="empire-link">i13.buzz</a>
+      <a href="https://i13.autos" target="_blank" rel="noopener" class="empire-link">i13.autos</a>
+      <a href="https://i13.lat" target="_blank" rel="noopener" class="empire-link">i13.lat</a>
+      <a href="https://i13.pics" target="_blank" rel="noopener" class="empire-link">i13.pics</a>
+      <a href="https://i13.space" target="_blank" rel="noopener" class="empire-link" style="color:var(--accent);border-color:rgba(0,245,212,0.3);">i13.space ✦</a>
+      <a href="https://ai13.fun" target="_blank" rel="noopener" class="empire-link">ai13.fun</a>
+      <a href="https://ai13.store" target="_blank" rel="noopener" class="empire-link">ai13.store</a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="container">
+    <div class="footer-logo">✦ i13.space</div>
+    <div class="footer-sub">Explore the Universe Live — real data, no fluff, always free.</div>
+    <div class="footer-links">
+      <a href="#iss-tracker">ISS Tracker</a>
+      <a href="#apod">NASA APOD</a>
+      <a href="#space-news-section">Space News</a>
+      <a href="#shop">Shop Gear</a>
+      <a href="#empire">Empire</a>
+      <a href="https://spunk.bet" target="_blank" rel="noopener">spunk.bet</a>
+      <a href="https://twitter.com/SpunkArt13" target="_blank" rel="noopener">@SpunkArt13</a>
+      <button onclick="openTip()" style="background:none;border:none;color:var(--muted);font-size:0.82rem;cursor:pointer;padding:0;font-family:inherit;">🧡 Tip Spunk</button>
+    </div>
+    <div class="footer-copy">
+      &copy; 2026 SPUNK LLC · Data: NASA Open APIs, Open Notify, Hacker News<br>
+      Amazon links are affiliate links. All data refreshes every 10 seconds.
+    </div>
+  </div>
+</footer>
+
+</div><!-- /page-wrap -->
+
+<!-- ========== VTR BADGE ========== -->
+<div style="position:fixed;bottom:12px;right:12px;background:#0d1220;border:1px solid #1a2a3e;border-radius:20px;padding:6px 14px;font-size:12px;color:#a0a0b8;z-index:9999;display:flex;align-items:center;gap:6px;" id="vtr-badge">
+  <span style="width:7px;height:7px;border-radius:50%;background:#00f5d4;animation:vtrPulse 2s infinite;display:inline-block;"></span>
+  <span id="vtr-count">...</span>
+</div>
+
+<!-- ========== TIP MODAL ========== -->
+<div id="tip-modal" onclick="if(event.target===this)closeTip()" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);align-items:center;justify-content:center;z-index:10000;">
+  <div style="background:#0d1220;border:1px solid #1a2a3e;border-radius:16px;padding:32px;max-width:420px;width:90%;text-align:center;">
+    <h3 style="color:#f0f0f0;margin-bottom:8px;">🧡 Tip Spunk</h3>
+    <p style="color:#a0a0b8;font-size:0.9rem;margin-bottom:20px;">Built by one person with AI. Every tip keeps these sites free. 🧡</p>
+    <div id="tip-addr" onclick="copyTip()" style="background:#050510;border:1px solid #1a2a3e;border-radius:8px;padding:12px;font-family:monospace;font-size:0.75rem;color:#00f5d4;word-break:break-all;cursor:pointer;margin-bottom:8px;">bc1pkepg42ctsvsxk499qu02qqyyz88gwjchnjpsu22wmng9rhpfv3jqw2t2hm</div>
+    <p style="color:#a0a0b8;font-size:0.8rem;margin-bottom:16px;">Click to copy · Bitcoin (BTC)</p>
+    <button onclick="closeTip()" style="background:#1a2a3e;color:#f0f0f0;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;">Close</button>
+  </div>
+</div>
+
+<!-- ========== SCRIPTS ========== -->
+<script>
+  /* ---- Tip modal ---- */
+  function openTip() { var m = document.getElementById('tip-modal'); if (m) m.style.display = 'flex'; }
+  function closeTip() { var m = document.getElementById('tip-modal'); if (m) m.style.display = 'none'; }
+  function copyTip() {
+    navigator.clipboard.writeText('bc1pkepg42ctsvsxk499qu02qqyyz88gwjchnjpsu22wmng9rhpfv3jqw2t2hm').then(function () {
+      var el = document.getElementById('tip-addr');
+      if (el) { var o = el.textContent; el.textContent = '✓ Copied!'; setTimeout(function () { el.textContent = o; }, 2000); }
+    }).catch(function () {});
+  }
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeTip(); });
+
+  /* ---- ISS tracking ---- */
+  async function loadISS() {
+    try {
+      const d = await fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent('http://api.open-notify.org/iss-now.json')).then(r => r.json());
+      if (d && d.iss_position) {
+        const lat = parseFloat(d.iss_position.latitude).toFixed(2);
+        const lon = parseFloat(d.iss_position.longitude).toFixed(2);
+        document.getElementById('iss-lat').textContent = lat + '\u00b0';
+        document.getElementById('iss-lon').textContent = lon + '\u00b0';
+        document.getElementById('iss-updated').textContent = 'Updated ' + new Date().toLocaleTimeString();
+        const shareEl = document.getElementById('iss-share');
+        if (shareEl) {
+          shareEl.href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(
+            'The ISS is over ' + lat + '\u00b0, ' + lon + '\u00b0 right now! Track it live at i13.space \u2014 @SpunkArt13'
+          );
+        }
+      }
+    } catch (e) {
+      // Fallback: try direct (works if CORS is open)
+      try {
+        const d2 = await fetch('http://api.open-notify.org/iss-now.json').then(r => r.json());
+        if (d2 && d2.iss_position) {
+          const lat = parseFloat(d2.iss_position.latitude).toFixed(2);
+          const lon = parseFloat(d2.iss_position.longitude).toFixed(2);
+          document.getElementById('iss-lat').textContent = lat + '\u00b0';
+          document.getElementById('iss-lon').textContent = lon + '\u00b0';
+          document.getElementById('iss-updated').textContent = 'Updated ' + new Date().toLocaleTimeString();
+          const shareEl = document.getElementById('iss-share');
+          if (shareEl) {
+            shareEl.href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(
+              'The ISS is over ' + lat + '\u00b0, ' + lon + '\u00b0 right now! Track it live at i13.space \u2014 @SpunkArt13'
+            );
+          }
+        }
+      } catch (e2) {
+        document.getElementById('iss-updated').textContent = 'Retrying...';
+      }
+    }
+  }
+
+  /* ---- NASA APOD ---- */
+  async function loadAPOD() {
+    try {
+      const d = await fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY').then(r => r.json());
+      const el = document.getElementById('apod-section');
+      if (!el || !d || !d.title) return;
+      const mediaHtml = d.media_type === 'image'
+        ? '<img src="' + d.url + '" alt="' + d.title.replace(/"/g, '&quot;') + '" loading="lazy" style="width:100%;border-radius:8px 8px 0 0;display:block;">'
+        : '<div style="padding:16px 24px 0;"><p style="color:var(--muted);">Today\'s APOD is a video. <a href="' + d.url + '" target="_blank" rel="noopener" style="color:var(--accent);">Watch it \u2192</a></p></div>';
+      el.innerHTML = mediaHtml +
+        '<div style="padding:20px 24px 24px;">' +
+        '<h3 style="color:var(--accent);margin-bottom:10px;font-size:1rem;">' + d.title + '</h3>' +
+        '<p style="color:var(--muted);font-size:0.83rem;line-height:1.6;">' + (d.explanation || '').slice(0, 320) + '...</p>' +
+        '<p style="color:#555575;font-size:0.73rem;margin-top:10px;">Date: ' + d.date + ' \u00b7 <a href="https://apod.nasa.gov/apod/astropix.html" target="_blank" rel="noopener" style="color:var(--muted);">NASA APOD</a></p>' +
+        '</div>';
+    } catch (e) {
+      var el = document.getElementById('apod-section');
+      if (el) el.innerHTML = '<div style="padding:24px;color:var(--muted);font-size:0.85rem;">Unable to load NASA APOD right now. <a href="https://apod.nasa.gov" target="_blank" rel="noopener" style="color:var(--accent);">Visit NASA APOD \u2192</a></div>';
+    }
+  }
+
+  /* ---- Astronauts ---- */
+  async function loadAstronauts() {
+    try {
+      const d = await fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent('http://api.open-notify.org/astros.json')).then(r => r.json());
+      const el = document.getElementById('astros-list');
+      if (!el || !d || !d.people) return;
+      const craftColors = { 'ISS': '#00f5d4', 'Tiangong': '#bf5af2', 'CSS': '#bf5af2' };
+      el.innerHTML =
+        '<p style="color:var(--muted);font-size:0.82rem;margin-bottom:14px;">' + d.number + ' people currently in space:</p>' +
+        d.people.map(function (p) {
+          var color = craftColors[p.craft] || '#58a6ff';
+          return '<div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);">' +
+            '<span style="font-size:1.3rem;">&#128104;&#8205;&#128640;</span>' +
+            '<span style="color:var(--text);font-weight:600;font-size:0.9rem;">' + p.name + '</span>' +
+            '<span style="margin-left:auto;font-size:0.72rem;font-weight:700;color:' + color + ';background:rgba(0,245,212,0.07);padding:3px 9px;border-radius:100px;border:1px solid ' + color + '33;">' + p.craft + '</span>' +
+            '</div>';
+        }).join('');
+    } catch (e) {
+      // Fallback: try direct
+      try {
+        const d2 = await fetch('http://api.open-notify.org/astros.json').then(r => r.json());
+        var el2 = document.getElementById('astros-list');
+        if (!el2 || !d2 || !d2.people) return;
+        el2.innerHTML = '<p style="color:var(--muted);font-size:0.82rem;margin-bottom:14px;">' + d2.number + ' people currently in space:</p>' +
+          d2.people.map(function (p) {
+            return '<div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);"><span style="font-size:1.3rem;">&#128104;&#8205;&#128640;</span><span style="color:var(--text);font-weight:600;font-size:0.9rem;">' + p.name + '</span><span style="margin-left:auto;color:var(--accent);font-size:0.75rem;">' + p.craft + '</span></div>';
+          }).join('');
+      } catch (e2) {
+        var el3 = document.getElementById('astros-list');
+        if (el3) el3.innerHTML = '<p style="color:var(--muted);">Data temporarily unavailable.</p>';
+      }
+    }
+  }
+
+  /* ---- Space news from HN ---- */
+  async function loadSpaceNews() {
+    var el = document.getElementById('space-news');
+    try {
+      const ids = await fetch('https://hacker-news.firebaseio.com/v0/topstories.json').then(r => r.json());
+      const top = ids.slice(0, 50);
+      const stories = await Promise.all(
+        top.map(function (id) {
+          return fetch('https://hacker-news.firebaseio.com/v0/item/' + id + '.json').then(r => r.json()).catch(function () { return null; });
+        })
+      );
+      const keywords = ['space', 'nasa', 'spacex', 'asteroid', 'orbit', 'rocket', 'mars', 'moon', 'iss', 'satellite', 'telescope', 'hubble', 'webb', 'artemis', 'astronaut', 'launch', 'cosmos', 'galaxy', 'exoplanet', 'solar'];
+      const spaceStories = stories.filter(function (s) {
+        return s && s.title && keywords.some(function (k) { return s.title.toLowerCase().includes(k); });
+      }).slice(0, 6);
+
+      if (!el) return;
+      if (spaceStories.length === 0) {
+        el.innerHTML = '<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;color:var(--muted);font-size:0.88rem;">No space stories in current top 50 — check back in a moment as we refresh every 10 seconds. <a href="https://news.ycombinator.com" target="_blank" rel="noopener" style="color:var(--accent);">Browse Hacker News \u2192</a></div>';
+        return;
+      }
+      el.innerHTML = spaceStories.map(function (s) {
+        var domain = '';
+        if (s.url) {
+          try { domain = new URL(s.url).hostname.replace('www.', ''); } catch (e) {}
+        }
+        return '<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 20px;transition:border-color 0.2s;" onmouseover="this.style.borderColor=\'rgba(0,245,212,0.3)\'" onmouseout="this.style.borderColor=\'var(--border)\'">' +
+          '<a href="' + (s.url || 'https://news.ycombinator.com/item?id=' + s.id) + '" target="_blank" rel="noopener" style="color:var(--text);font-weight:600;font-size:0.92rem;text-decoration:none;line-height:1.4;display:block;margin-bottom:8px;">' + s.title + '</a>' +
+          '<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">' +
+          '<span style="color:var(--accent);font-size:0.75rem;font-weight:700;">\u25b2 ' + (s.score || 0) + '</span>' +
+          '<a href="https://news.ycombinator.com/item?id=' + s.id + '" target="_blank" rel="noopener" style="color:var(--muted);font-size:0.75rem;text-decoration:none;">\ud83d\udcac ' + (s.descendants || 0) + ' comments</a>' +
+          (domain ? '<span style="color:#555575;font-size:0.72rem;">' + domain + '</span>' : '') +
+          '</div>' +
+          '</div>';
+      }).join('');
+    } catch (e) {
+      if (el) el.innerHTML = '<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;color:var(--muted);">Couldn\'t load news right now. Retrying...</div>';
+    }
+  }
+
+  /* ---- VTR badge ---- */
+  (function () {
+    if (window._vtrInit) return;
+    window._vtrInit = true;
+    var DB = 'https://predict-network-ec767-default-rtdb.firebaseio.com';
+    var site = (location.hostname || 'local').replace(/\./g, '_').replace(/[#$\[\]]/g, '_');
+    var sid = 's' + Math.random().toString(36).slice(2) + Date.now().toString(36);
+    var sRef = DB + '/vtr/' + site + '/s/' + sid + '.json';
+    var allRef = DB + '/vtr/' + site + '/s.json';
+    var now = Date.now;
+    function ping() { fetch(sRef, { method: 'PUT', body: JSON.stringify({ t: now() }), headers: { 'Content-Type': 'application/json' } }).catch(function () {}); }
+    function refresh() {
+      fetch(allRef).then(function (r) { return r.json(); }).then(function (d) {
+        var n = 1;
+        if (d && typeof d === 'object') {
+          var vals = Object.values(d);
+          n = Math.max(1, vals.filter(function (v) { return v && v.t && (now() - v.t) < 25000; }).length);
+          Object.entries(d).forEach(function (e) {
+            if (e[1] && e[1].t && (now() - e[1].t) > 60000) {
+              fetch(DB + '/vtr/' + site + '/s/' + e[0] + '.json', { method: 'DELETE' }).catch(function () {});
+            }
+          });
+        }
+        var el = document.getElementById('vtr-count');
+        if (el) el.textContent = n + (n === 1 ? ' visitor' : ' visitors') + ' online';
+      }).catch(function () {
+        var el = document.getElementById('vtr-count');
+        if (el) el.textContent = '1 visitor online';
+      });
+    }
+    var day = new Date().toISOString().slice(0, 10);
+    var hRef = DB + '/vtr/' + site + '/hits/' + day + '.json';
+    fetch(hRef).then(function (r) { return r.json(); }).then(function (n) {
+      fetch(hRef, { method: 'PUT', body: JSON.stringify((n || 0) + 1), headers: { 'Content-Type': 'application/json' } }).catch(function () {});
+    }).catch(function () {});
+    window.addEventListener('pagehide', function () { fetch(sRef, { method: 'DELETE', keepalive: true }).catch(function () {}); });
+    ping(); refresh();
+    setInterval(function () { ping(); refresh(); }, 10000);
+  })();
+
+  /* ---- Bootstrap ---- */
+  function heartbeat() { loadISS(); loadSpaceNews(); }
+  loadISS();
+  loadAPOD();
+  loadAstronauts();
+  loadSpaceNews();
+  setInterval(heartbeat, 10000);
+</script>
+
+</body>
+</html>
